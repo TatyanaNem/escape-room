@@ -8,15 +8,17 @@ import ContactsScreen from "../../pages/contacts-screen/contacts-screen";
 import LoginScreen from "../../pages/login-screen/login-screen";
 import PrivateRoute from "../private-route/private-route";
 import BookingScreen from "../../pages/private-pages/booking-screen/booking-screen";
-import MyBookingsScreen from "../../pages/private-pages/my-bookings-screen/my-bookings-screen";
+import MyQuestsScreen from "../../pages/private-pages/my-quests-screen/my-quests-screen";
+import Layout from "../layout/layout";
 
 export default function App() {
   return (
     <HelmetProvider>
       <HistoryRouter history={browserHistory}>
         <Routes>
+        <Route path={AppRoute.Root} element={<Layout/>}>
           <Route
-            path={AppRoute.Root}
+            index
             element={<MainScreen />}
           />
           <Route
@@ -35,9 +37,9 @@ export default function App() {
             }
           />
           <Route
-            path={AppRoute.MyBookings}
+            path={AppRoute.MyQuests}
             element={<PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-              <MyBookingsScreen />
+              <MyQuestsScreen />
             </PrivateRoute>
             }
           />
@@ -45,6 +47,7 @@ export default function App() {
             path={'*'}
             element={<h1>404. Page not found</h1>}
           />
+        </Route>
         </Routes>
       </HistoryRouter>
     </HelmetProvider>

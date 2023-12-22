@@ -4,7 +4,7 @@ export enum AppRoute {
   Contacts = '/contacts',
   Quest = '/quest/:id',
   Booking = '/booking/:id',
-  MyBookings = '/my-bookings',
+  MyQuests = '/my-quests',
   NotFound = '/page404'
 }
 
