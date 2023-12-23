@@ -1,4 +1,4 @@
-import { TIcon } from "../../types/filter-item";
+import { TIcon } from '../../types/filter-item';
 
 type FilterItemProps = {
   id: string;
@@ -16,7 +16,7 @@ export default function FilterItem ({id, value, name, icon, checked, labelText, 
     <li key={id} className="filter__item">
       <input
         type="radio"
-        name="type"
+        name={name}
         id={id}
         value={value}
         checked={checked}
@@ -25,9 +25,11 @@ export default function FilterItem ({id, value, name, icon, checked, labelText, 
       <label
         className="filter__label"
         htmlFor={name}
+        onClick={onChange}
       >
         {
-          icon && <svg
+          icon &&
+          <svg
             className="filter__icon"
             width={icon.width}
             height={icon.height}

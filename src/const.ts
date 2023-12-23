@@ -14,25 +14,41 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export const TypeFilter = {
-  All: {name: 'all', labelText: 'Все квесты', icon: {title: 'all-quests', width: '26', height: '30'}},
-  Adventure: {name: 'adventure', labelText: 'Приключения', icon: {title: 'adventure', width: '36', height: '30'}},
-  Horror: {name: 'horror', labelText: 'Ужасы', icon: {title: 'horror', width: '30', height: '30'}},
-  Mystic: {name: 'mystic', labelText: 'Мистика', icon: {title: 'mystic', width: '30', height: '30'}},
-  Detective: {name: 'detective', labelText: 'Детектив', icon: {title: 'detective', width: '40', height: '30'}},
-  SciFi: {name: 'sci-fi', labelText: 'Sci-fi', icon: {title: 'sci-fi', width: '28', height: '30'}}
-};
+export enum FilterType {
+  All = 'all',
+  Adventure = 'adventure',
+  Horror = 'horror',
+  Mystic = 'mystic',
+  Detective = 'detective',
+  SciFi = 'sci-fi'
+}
 
-export const DEFAULT_TYPE_FILTER = TypeFilter.All;
+export const TypeFilter = [
+  {name: FilterType.All, labelText: 'Все квесты', icon: {title: 'all-quests', width: '26', height: '30'}},
+  {name: FilterType.Adventure, labelText: 'Приключения', icon: {title: 'adventure', width: '36', height: '30'}},
+  {name: FilterType.Horror, labelText: 'Ужасы', icon: {title: 'horror', width: '30', height: '30'}},
+  {name: FilterType.Mystic, labelText: 'Мистика', icon: {title: 'mystic', width: '30', height: '30'}},
+  {name: FilterType.Detective, labelText: 'Детектив', icon: {title: 'detective', width: '40', height: '30'}},
+  {name: FilterType.SciFi, labelText: 'Sci-fi', icon: {title: 'sci-fi', width: '28', height: '30'}}
+];
 
-export const LevelFilter = {
-  Any: {name: 'any', labelText: 'Любой'},
-  Easy: {name: 'easy', labelText: 'Лёгкий'},
-  Medium:{ name: 'medium', labelText: 'Средний'},
-  Hard: {name: 'hard', labelText: 'Сложный'}
-};
+export const DEFAULT_TYPE_FILTER = FilterType.All;
 
-export const DEFAULT_LEVEL_FILTER = LevelFilter.Any;
+export enum FilterLevel {
+  Any = 'any',
+  Easy = 'easy',
+  Medium = 'medium',
+  Hard = 'hard'
+}
+
+export const LevelFilter = [
+  {name: FilterLevel.Any, labelText: 'Любой'},
+  {name: FilterLevel.Easy, labelText: 'Лёгкий'},
+  { name: FilterLevel.Medium, labelText: 'Средний'},
+  {name: FilterLevel.Hard, labelText: 'Сложный'}
+];
+
+export const DEFAULT_LEVEL_FILTER = FilterLevel.Any;
 
 export const BACKEND_URL = 'https://grading.design.htmlacademy.pro/v1/escape-room';
 export const REQUEST_TIMEOUT = 5000;

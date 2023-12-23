@@ -1,30 +1,61 @@
-import { useState } from "react";
-import { TFilterItem } from "../../types/filter-item";
-import FilterItem from "../filter-item/filter-item";
+import FilterItem from '../filter-item/filter-item';
+import { FilterLevel, FilterType, LevelFilter, TypeFilter } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { setCurrentLevelFilter, setCurrentTypeFilter } from '../../store/data-process/data-process';
+import { selectLevelFilter, selectTypeFilter } from '../../store/data-process/selectors';
 
-type FilterListProps = {
-  checkedItem: TFilterItem;
-  filtersSet: {[key: string]: TFilterItem};
-}
+export default function FilterList (): JSX.Element {
+  const levelFilter = useAppSelector(selectLevelFilter);
+  const typeFilter = useAppSelector(selectTypeFilter);
+  const dispatch = useAppDispatch();
 
-export default function FilterList ({checkedItem, filtersSet}: FilterListProps) {
-  const [checkedValue, setCheckedValue] = useState(checkedItem);
+  function onChangeTypeFilterHandler (filter: FilterType) {
+    dispatch(setCurrentTypeFilter(filter));
+  }
+
+  function onChangeLevelFilterHandler (filter: FilterLevel) {
+    dispatch(setCurrentLevelFilter(filter));
+  }
+
   return (
-    <ul className="filter__list">
+    <>
+      <fieldset className="filter__section">
+        <legend className="visually-hidden">Тематика</legend>
+        <ul className="filter__list">
           {
-            Object.values(filtersSet)
-              .map((item) => {
-                return (<FilterItem
+            TypeFilter
+              .map((item) => (
+                <FilterItem
+                  key={item.name}
                   id={item.name}
                   value={item.name}
-                  name={item.name}
+                  name="type"
                   icon={item.icon}
-                  checked={item === checkedValue}
+                  checked={item.name === typeFilter}
                   labelText={item.labelText}
-                  onChange={() => setCheckedValue(item)}
-                />)
-              })
+                  onChange={() => onChangeTypeFilterHandler(item.name)}
+                />))
           }
         </ul>
+      </fieldset>
+      <fieldset className="filter__section">
+        <legend className="visually-hidden">Сложность</legend>
+        <ul className="filter__list">
+          {
+            LevelFilter
+              .map((item) => (
+                <FilterItem
+                  key={item.name}
+                  id={item.name}
+                  value={item.name}
+                  name="level"
+                  checked={item.name === levelFilter}
+                  labelText={item.labelText}
+                  onChange={() => onChangeLevelFilterHandler(item.name)}
+                />))
+          }
+        </ul>
+      </fieldset>
+    </>
   );
 }

@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { DEFAULT_LEVEL_FILTER, DEFAULT_TYPE_FILTER, NameSpace, RequestStatus } from '../../const';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { DEFAULT_LEVEL_FILTER, DEFAULT_TYPE_FILTER, FilterLevel, FilterType, NameSpace, RequestStatus } from '../../const';
 import { TDataProcess } from '../../types/state';
 import { fetchActiveQuest, fetchQuests } from '../api-actions';
 
@@ -15,7 +15,14 @@ const initialState: TDataProcess = {
 export const dataProcess = createSlice({
   name: NameSpace.DataProcess,
   initialState,
-  reducers: {},
+  reducers: {
+    setCurrentTypeFilter: (state, action: PayloadAction<FilterType>) => {
+      state.currentTypeFilter = action.payload;
+    },
+    setCurrentLevelFilter: (state, action: PayloadAction<FilterLevel>) => {
+      state.currentLevelFilter = action.payload;
+    }
+  },
   extraReducers (builder) {
     builder
       .addCase(fetchQuests.pending, (state) => {
@@ -40,3 +47,5 @@ export const dataProcess = createSlice({
       });
   }
 });
+
+export const {setCurrentTypeFilter, setCurrentLevelFilter} = dataProcess.actions;

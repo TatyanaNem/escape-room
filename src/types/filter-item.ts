@@ -1,3 +1,5 @@
+import { FilterLevel, FilterType } from '../const';
+
 export type TIcon = {
   title: string;
   width: string;
@@ -5,7 +7,7 @@ export type TIcon = {
 }
 
 export type TFilterItem = {
-  name: string;
+  name: FilterLevel | FilterType;
   labelText: string;
   icon?: TIcon;
 }

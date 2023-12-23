@@ -1,4 +1,4 @@
-import { AuthorizationStatus, LevelFilter, RequestStatus, TypeFilter } from '../const';
+import { AuthorizationStatus, FilterLevel, FilterType, RequestStatus } from '../const';
 import { store } from '../store';
 import { TQuest, TQuestReview } from './quest';
 import { TUser } from './user';
@@ -18,6 +18,6 @@ export type TDataProcess = {
   activeQuest: null | TQuest;
   fetchingQuestsStatus: RequestStatus;
   fetchingActiveQuestStatus: RequestStatus;
-  currentLevelFilter: typeof LevelFilter[keyof typeof LevelFilter];
-  currentTypeFilter: typeof TypeFilter[keyof typeof TypeFilter];
+  currentLevelFilter: FilterLevel;
+  currentTypeFilter: FilterType;
 }
