@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { DEFAULT_LEVEL_FILTER, DEFAULT_TYPE_FILTER, NameSpace, RequestStatus } from '../../const';
 import { TDataProcess } from '../../types/state';
-import { fetchQuests } from '../api-actions';
+import { fetchActiveQuest, fetchQuests } from '../api-actions';
 
 const initialState: TDataProcess = {
   quests: [],
   activeQuest: null,
   fetchingQuestsStatus: RequestStatus.Idle,
-  fetchingActiveQuest: RequestStatus.Idle,
+  fetchingActiveQuestStatus: RequestStatus.Idle,
   currentLevelFilter: DEFAULT_LEVEL_FILTER,
   currentTypeFilter: DEFAULT_TYPE_FILTER
 };
@@ -27,6 +27,16 @@ export const dataProcess = createSlice({
       })
       .addCase(fetchQuests.rejected, (state) => {
         state.fetchingQuestsStatus = RequestStatus.Error;
+      })
+      .addCase(fetchActiveQuest.pending, (state) => {
+        state.fetchingActiveQuestStatus = RequestStatus.Loading;
+      })
+      .addCase(fetchActiveQuest.fulfilled, (state, action) => {
+        state.fetchingActiveQuestStatus = RequestStatus.Success;
+        state.activeQuest = action.payload;
+      })
+      .addCase(fetchActiveQuest.rejected, (state) => {
+        state.fetchingActiveQuestStatus = RequestStatus.Error;
       });
   }
 });

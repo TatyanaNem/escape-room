@@ -42,7 +42,7 @@ export default function App() {
               element={<LoginScreen />}
             />
             <Route
-              path={AppRoute.Quest}
+              path={`${AppRoute.Quest}/:questId`}
               element={<QuestScreen />}
             />
             <Route

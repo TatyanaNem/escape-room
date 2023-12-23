@@ -17,7 +17,7 @@ export type TDataProcess = {
   quests: TQuestReview[];
   activeQuest: null | TQuest;
   fetchingQuestsStatus: RequestStatus;
-  fetchingActiveQuest: RequestStatus;
+  fetchingActiveQuestStatus: RequestStatus;
   currentLevelFilter: typeof LevelFilter[keyof typeof LevelFilter];
   currentTypeFilter: typeof TypeFilter[keyof typeof TypeFilter];
 }
