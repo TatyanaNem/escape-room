@@ -2,12 +2,17 @@ import { useEffect } from 'react';
 import FilterForm from '../../components/filter-form/filter-form';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchQuests } from '../../store/api-actions';
-import { selectQuests } from '../../store/data-process/selectors';
+import { selectLevelFilter, selectQuests, selectTypeFilter } from '../../store/data-process/selectors';
 import QuestsList from '../../components/quests-list/quests-list';
+import { filterItems } from '../../utils/filter';
 
 export default function MainScreen(): JSX.Element {
   const quests = useAppSelector(selectQuests);
   const dispatch = useAppDispatch();
+  const levelFilter = useAppSelector(selectLevelFilter);
+  const typeFilter = useAppSelector(selectTypeFilter);
+
+  const filteredQuests = filterItems(quests, typeFilter, levelFilter);
 
   useEffect(() => {
     dispatch(fetchQuests());
@@ -25,7 +30,7 @@ export default function MainScreen(): JSX.Element {
           <FilterForm />
         </div>
         <h2 className="title visually-hidden">Выберите квест</h2>
-        <QuestsList quests={quests}/>
+        <QuestsList quests={filteredQuests}/>
       </div>
     </main>
   );

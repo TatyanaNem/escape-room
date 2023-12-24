@@ -1,12 +1,12 @@
-import { LevelFilter, TypeFilter } from '../const';
+import { FilterLevel, FilterType } from '../const';
 
 export type TQuestReview = {
   id: string;
   title: string;
   previewImg: string;
   previewImgWebp: string;
-  level: keyof typeof LevelFilter;
-  type: keyof typeof TypeFilter;
+  level: FilterLevel;
+  type: FilterType;
   peopleMinMax: number[];
   }
 
