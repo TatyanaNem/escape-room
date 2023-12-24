@@ -5,6 +5,7 @@ import { fetchQuests } from '../../store/api-actions';
 import { selectLevelFilter, selectQuests, selectTypeFilter } from '../../store/data-process/selectors';
 import QuestsList from '../../components/quests-list/quests-list';
 import { filterItems } from '../../utils/filter';
+import NoQuests from '../../components/no-quests/no-quests';
 
 export default function MainScreen(): JSX.Element {
   const quests = useAppSelector(selectQuests);
@@ -30,7 +31,11 @@ export default function MainScreen(): JSX.Element {
           <FilterForm />
         </div>
         <h2 className="title visually-hidden">Выберите квест</h2>
-        <QuestsList quests={filteredQuests}/>
+        {
+          filteredQuests.length === 0
+            ? <NoQuests />
+            : <QuestsList quests={filteredQuests}/>
+        }
       </div>
     </main>
   );
