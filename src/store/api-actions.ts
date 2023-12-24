@@ -1,9 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { TUser } from '../types/user';
 import { AppDispatch, State } from '../types/state';
-import { AxiosInstance } from 'axios';
-import { APIRoute } from '../const';
+import { AxiosError, AxiosInstance } from 'axios';
+import { APIRoute, AppRoute, HttpStatus } from '../const';
 import { TQuest, TQuestReview } from '../types/quest';
+import { TLoginData } from '../types/login-data';
+import { dropToken, setToken } from '../services/token';
+import { redirectToRoute } from './actions';
 
 type TExtra = {
   dispatch: AppDispatch;
@@ -33,4 +36,35 @@ export const fetchActiveQuest = createAsyncThunk<TQuest, TQuest['id'], TExtra>(
     const {data} = await api.get<TQuest>(`${APIRoute.Quests}/${questId}`);
     return data;
   }
+);
+
+export const login = createAsyncThunk<TUser, TLoginData, TExtra>(
+  'user/login',
+  async ({email, password}, {extra: api, rejectWithValue, dispatch}) => {
+    try {
+      const {data} = await api.post<TUser>(APIRoute.Login, {email, password});
+      setToken(data.token);
+      dispatch(redirectToRoute(AppRoute.Root));
+      return data;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        if (error.response && error.response.status === HttpStatus.BadRequest) {
+          return rejectWithValue('Bad Request: Some data is missing or invalid.');
+        } else {
+          return rejectWithValue('An error accured while logging in');
+        }
+      } else {
+        return rejectWithValue('Unknown error during login.');
+      }
+    }
+  }
+);
+
+export const logout = createAsyncThunk<void, undefined, TExtra>(
+  'user/logout',
+  async (_arg, {extra: api, dispatch}) => {
+    await api.delete(APIRoute.Logout);
+    dropToken();
+    dispatch(redirectToRoute(AppRoute.Root));
+  },
 );

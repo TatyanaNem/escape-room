@@ -72,3 +72,12 @@ export enum NameSpace {
   UserProcess = 'USER_PROCESS',
   DataProcess = 'DATA_PROCESS',
 }
+
+export const HttpStatus = {
+  Ok: 200,
+  Created: 201,
+  BadRequest: 400,
+  Unauthorized: 401,
+  Forbidden: 403,
+  NotFound: 404,
+} as const;
