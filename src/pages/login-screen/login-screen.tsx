@@ -19,20 +19,7 @@ export default function LoginScreen() {
     mode: 'onChange'
   });
 
-  // const checkPassword = /^(?=.*[A-Za-zА-Яа-я])(?=.*\d).+$/.test(password);
-  // const checkEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  // const isValid = checkEmail && checkPassword;
-
   const authStatus = useAppSelector(selectAuthStatus);
-  // const loginSendingStatus = useAppSelector(selectLoginSendingStatus);
-
-  // function onEmailChangeHandler (evt: React.ChangeEvent<HTMLInputElement>) {
-  //   setEmail(evt.currentTarget.value);
-  // }
-
-  // function onPasswordChangeHandler (evt: React.ChangeEvent<HTMLInputElement>) {
-  //   setPassword(evt.currentTarget.value);
-  // }
 
   const onSubmit: SubmitHandler<TFormInput> = (data: TLoginData, event?: React.BaseSyntheticEvent) => {
     const {email, password} = data;
