@@ -16,6 +16,7 @@ export type TUserProcess = {
 export type TDataProcess = {
   quests: TQuestReview[];
   activeQuest: null | TQuest;
+  myQuests: TQuestReview[];
   fetchingQuestsStatus: RequestStatus;
   fetchingActiveQuestStatus: RequestStatus;
   currentLevelFilter: FilterLevel;

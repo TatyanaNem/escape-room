@@ -1,4 +1,4 @@
-import { FilterLevel, FilterType } from '../const';
+import { Date, FilterLevel, FilterType } from '../const';
 
 export type TQuestReview = {
   id: string;
@@ -16,3 +16,17 @@ export type TQuest = TQuestReview & {
   coverImgWebp: string;
 }
 
+export type TMyQuest = {
+  date: Date;
+  time: string;
+  contactPerson: string;
+  phone: string;
+  withChildren: boolean;
+  peopleCount: number;
+  id: string;
+  location: {
+    address: string;
+    coords: number[];
+  };
+  quest: TQuestReview;
+}

@@ -6,3 +6,4 @@ export const selectActiveQuestFetchingStatus = (state: State) => state[NameSpace
 export const selectActiveQuest = (state: State) => state[NameSpace.DataProcess].activeQuest;
 export const selectLevelFilter = (state: State) => state[NameSpace.DataProcess].currentLevelFilter;
 export const selectTypeFilter = (state: State) => state[NameSpace.DataProcess].currentTypeFilter;
+export const selectMyQuests = (state: State) => state[NameSpace.DataProcess].myQuests;

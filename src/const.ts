@@ -1,5 +1,3 @@
-import { TCity } from './types/city';
-
 export enum AppRoute {
   Root = '/',
   Login = '/login',
@@ -84,10 +82,8 @@ export const HttpStatus = {
   NotFound: 404,
 } as const;
 
-export const City: TCity = {
-  location: {
-    latitute: 59.968322,
-    longitude: 30.31735
-  },
-  zoom: 10
-};
+export enum Date {
+  Today = 'today',
+  Tomorrow = 'tomorrow'
+}
+

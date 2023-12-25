@@ -30,10 +30,9 @@ export default function MainScreen(): JSX.Element {
         <div className="page-content__item">
           <FilterForm />
         </div>
-        <h2 className="title visually-hidden">Выберите квест</h2>
         {
           filteredQuests.length === 0
-            ? <NoQuests />
+            ? <NoQuests block='quests'/>
             : <QuestsList quests={filteredQuests}/>
         }
       </div>

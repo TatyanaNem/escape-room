@@ -38,6 +38,14 @@ export const fetchActiveQuest = createAsyncThunk<TQuest, TQuest['id'], TExtra>(
   }
 );
 
+export const fetchMyQuests = createAsyncThunk<TQuestReview[], undefined, TExtra>(
+  'data/fetchMyQuests',
+  async (_arg, {extra: api}) => {
+    const {data} = await api.get<TQuestReview[]>(APIRoute.MyQuests);
+    return data;
+  }
+);
+
 export const login = createAsyncThunk<TUser, TLoginData, TExtra>(
   'user/login',
   async ({email, password}, {extra: api, rejectWithValue, dispatch}) => {
