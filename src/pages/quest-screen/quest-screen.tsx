@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Navigate, useParams } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchActiveQuest } from '../../store/api-actions';
 import { selectActiveQuest, selectActiveQuestFetchingStatus } from '../../store/data-process/selectors';
@@ -31,7 +31,7 @@ export default function QuestScreen() {
     return null;
   }
 
-  const {previewImg, previewImgWebp, title, type, level, peopleMinMax, description} = activeQuest;
+  const {id, previewImg, previewImgWebp, title, type, level, peopleMinMax, description} = activeQuest;
 
   return (
     <main className="decorated-page quest-page">
@@ -43,7 +43,7 @@ export default function QuestScreen() {
       </div>
       <div className="container container--size-l">
         <div className="quest-page__content">
-          <h1 className="title title--size-l title--uppercase quest-page__title">{type}</h1>
+          <h1 className="title title--size-l title--uppercase quest-page__title">{title}</h1>
           <p className="subtitle quest-page__subtitle"><span className="visually-hidden">Жанр:</span>
             {type}
           </p>
@@ -64,7 +64,12 @@ export default function QuestScreen() {
           <p className="quest-page__description">
             {description}
           </p>
-          <a className="btn btn--accent btn--cta quest-page__btn" href="booking.html">Забронировать</a>
+          <Link
+            className="btn btn--accent btn--cta quest-page__btn"
+            to={`${AppRoute.Quest}/${id}${AppRoute.Booking}`}
+          >
+            Забронировать
+          </Link>
         </div>
       </div>
     </main>

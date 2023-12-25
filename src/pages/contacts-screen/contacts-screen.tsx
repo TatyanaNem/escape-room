@@ -1,5 +1,6 @@
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import { CityForMap } from '../../const';
+import Map from '../../components/map/map';
 
 export default function ContactsScreen() {
   return (
@@ -44,21 +45,9 @@ export default function ContactsScreen() {
           <div className="contacts__map">
             <div className="map">
               <div className="map__container">
-                <MapContainer
-                  center={[59.968322, 30.31735]}
-                  zoom={16}
-                  scrollWheelZoom={false}
-                  style={{width: '100%',height: '100%'}}
-                >
-                  <TileLayer
-                    url="http://tile2.maps.2gis.com/tiles?x={x}&y={y}&z={z}"
-                  />
-                  <Marker position={[59.968322, 30.31735]}>
-                    <Popup>
-                    Санкт-Петербург,<br/> Набережная реки Карповка, д 5П
-                    </Popup>
-                  </Marker>
-                </MapContainer>
+                <Map
+                  places={[CityForMap]}
+                />
               </div>
             </div>
           </div>

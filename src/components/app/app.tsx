@@ -46,7 +46,7 @@ export default function App() {
               element={<QuestScreen />}
             />
             <Route
-              path={AppRoute.Booking}
+              path={`${AppRoute.Quest}/:questId${AppRoute.Booking}`}
               element={
                 <PrivateRoute authorizationStatus={authStatus}>
                   <BookingScreen />

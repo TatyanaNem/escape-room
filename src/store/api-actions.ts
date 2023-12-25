@@ -7,6 +7,7 @@ import { TQuest, TQuestReview } from '../types/quest';
 import { TLoginData } from '../types/login-data';
 import { dropToken, setToken } from '../services/token';
 import { redirectToRoute } from './actions';
+import { TBookingInfo } from '../types/booking-info';
 
 type TExtra = {
   dispatch: AppDispatch;
@@ -42,6 +43,14 @@ export const fetchMyQuests = createAsyncThunk<TQuestReview[], undefined, TExtra>
   'data/fetchMyQuests',
   async (_arg, {extra: api}) => {
     const {data} = await api.get<TQuestReview[]>(APIRoute.MyQuests);
+    return data;
+  }
+);
+
+export const fetchQuestBookingInfo = createAsyncThunk<TBookingInfo[], TQuest['id'], TExtra>(
+  'data/fetchBookingInfo',
+  async (questId, {extra: api}) => {
+    const {data} = await api.get<TBookingInfo[]>(`${AppRoute.Quest}/${questId}${AppRoute.Booking}`);
     return data;
   }
 );

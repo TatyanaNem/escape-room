@@ -1,4 +1,4 @@
-import { Date, FilterLevel, FilterType } from '../const';
+import { BookingDate, FilterLevel, FilterType } from '../const';
 
 export type TQuestReview = {
   id: string;
@@ -17,7 +17,7 @@ export type TQuest = TQuestReview & {
 }
 
 export type TMyQuest = {
-  date: Date;
+  date: BookingDate;
   time: string;
   contactPerson: string;
   phone: string;

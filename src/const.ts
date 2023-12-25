@@ -1,9 +1,11 @@
+import { TBookingInfo } from './types/booking-info';
+
 export enum AppRoute {
   Root = '/',
   Login = '/login',
   Contacts = '/contacts',
   Quest = '/quest',
-  Booking = '/booking/:id',
+  Booking = '/booking',
   MyQuests = '/my-quests',
   NotFound = '/page404'
 }
@@ -82,8 +84,18 @@ export const HttpStatus = {
   NotFound: 404,
 } as const;
 
-export enum Date {
+export enum BookingDate {
   Today = 'today',
   Tomorrow = 'tomorrow'
 }
 
+export const CityForMap: TBookingInfo = {
+  id: '1',
+  location: {
+    address: 'Набережная реки Карповка, д 5П',
+    coords: [59.968322, 30.31735]
+  }
+};
+
+export const URL_MARKER_DEFAULT = 'img/svg/pin-default.svg';
+export const URL_MARKER_CURRENT = 'img/svg/pin-active.svg';
