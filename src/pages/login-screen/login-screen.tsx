@@ -6,6 +6,7 @@ import { AppRoute, AuthorizationStatus} from '../../const';
 import { login } from '../../store/api-actions';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { TLoginData } from '../../types/login-data';
+import styles from './login-screen.module.css';
 
 type TFormInput = {
   email: string;
@@ -74,7 +75,7 @@ export default function LoginScreen() {
                     name="email"
                     placeholder="Адрес электронной почты"
                   />
-                  {errors.email && <span>{errors.email.message}</span>}
+                  {errors.email && <span className={styles.error}>{errors.email.message}</span>}
                 </div>
                 <div className="custom-input login-form__input">
                   <label className="custom-input__label" htmlFor="password">
@@ -85,7 +86,7 @@ export default function LoginScreen() {
                       required: 'Введите пароль',
                       pattern: {
                         value: /^(?=.*[A-Za-zА-Яа-я])(?=.*\d).+$/,
-                        message: 'Введите валидный e-mail'
+                        message: 'Пароль должен содержать буквы и цифры'
                       },
                       minLength: {
                         value: 3,
@@ -102,7 +103,7 @@ export default function LoginScreen() {
                     name="password"
                     placeholder="Пароль"
                   />
-                  <div>{errors?.password && <span>{errors?.password?.message}</span>}</div>
+                  <div>{errors?.password && <span className={styles.error}>{errors?.password?.message}</span>}</div>
                 </div>
               </div>
               <button

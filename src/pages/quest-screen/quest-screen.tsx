@@ -4,8 +4,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchActiveQuest } from '../../store/api-actions';
 import { selectActiveQuest, selectActiveQuestFetchingStatus } from '../../store/data-process/selectors';
 import { AppRoute, RequestStatus } from '../../const';
-import Loading from '../../components/loading/loading';
 import { changeStringEnding } from '../../utils/common';
+import { Spinner } from '../../components/spinner/spinner';
 
 export default function QuestScreen() {
   const {questId} = useParams();
@@ -20,7 +20,7 @@ export default function QuestScreen() {
   }, [dispatch, questId]);
 
   if (fetchingStatus === RequestStatus.Loading) {
-    return <Loading/>;
+    return <Spinner/>;
   }
 
   if (fetchingStatus === RequestStatus.Error) {

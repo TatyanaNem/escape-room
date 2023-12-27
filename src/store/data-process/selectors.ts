@@ -9,3 +9,5 @@ export const selectLevelFilter = (state: State) => state[NameSpace.DataProcess].
 export const selectTypeFilter = (state: State) => state[NameSpace.DataProcess].currentTypeFilter;
 export const selectMyQuests = (state: State) => state[NameSpace.DataProcess].myQuests;
 export const selectQuestBookingInfo = (state: State) => state[NameSpace.DataProcess].questBookingInfo;
+export const selectSendingBookingStatus = (state: State) => state[NameSpace.DataProcess].sendingBookingStatus;
+export const selectDeletingBookingStatus = (state: State) => state[NameSpace.DataProcess].deletingBookingStatus;

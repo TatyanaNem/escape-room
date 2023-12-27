@@ -73,6 +73,7 @@ export enum RequestStatus {
 export enum NameSpace {
   UserProcess = 'USER_PROCESS',
   DataProcess = 'DATA_PROCESS',
+  AppProcess = 'APP_PROCESS',
 }
 
 export const HttpStatus = {
@@ -83,6 +84,8 @@ export const HttpStatus = {
   Forbidden: 403,
   NotFound: 404,
 } as const;
+
+export const TIMEOUT_SHOW_ERROR = 2000;
 
 export enum BookingDate {
   Today = 'today',

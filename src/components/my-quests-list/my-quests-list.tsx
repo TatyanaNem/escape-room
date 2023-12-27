@@ -1,8 +1,8 @@
-import { TMyQuest, TQuestReview } from '../../types/quest';
+import { TMyQuest } from '../../types/quest';
 import MyQuestCard from '../my-quest-card/my-quest-card';
 
 type TMyQuestsListProps = {
-  myQuests: TQuestReview[] | TMyQuest[];
+  myQuests: TMyQuest[];
 }
 
 export default function MyQuestsList ({myQuests}: TMyQuestsListProps) {

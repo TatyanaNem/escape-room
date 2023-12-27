@@ -1,17 +1,33 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { fetchMyQuests } from '../../../store/api-actions';
-import { selectMyQuests } from '../../../store/data-process/selectors';
+import { selectFetchingQuestsStatus, selectMyQuests } from '../../../store/data-process/selectors';
 import MyQuestsList from '../../../components/my-quests-list/my-quests-list';
 import NoQuests from '../../../components/no-quests/no-quests';
+import { AppRoute, RequestStatus } from '../../../const';
+import { Navigate } from 'react-router-dom';
+import { Spinner } from '../../../components/spinner/spinner';
 
 export default function MyQuestsScreen() {
   const dispatch = useAppDispatch();
   const myQuests = useAppSelector(selectMyQuests);
+  const fetchingStatus = useAppSelector(selectFetchingQuestsStatus);
 
   useEffect(() => {
     dispatch(fetchMyQuests());
   }, [dispatch]);
+
+  if (fetchingStatus === RequestStatus.Loading) {
+    return <Spinner/>;
+  }
+
+  if (fetchingStatus === RequestStatus.Error) {
+    return <Navigate to={AppRoute.NotFound} />;
+  }
+
+  if(fetchingStatus !== RequestStatus.Success || !myQuests) {
+    return null;
+  }
 
   return (
     <main className="page-content decorated-page">

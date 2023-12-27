@@ -4,9 +4,11 @@ import { TSlot } from '../../types/slot';
 type TimeSlotProps = {
   day: BookingDate;
   slot: TSlot;
+  onChange: () => void;
+  onClick: (value: string) => void;
 }
 
-export default function TimeSlot({slot, day}: TimeSlotProps) {
+export default function TimeSlot({slot, day, onChange, onClick}: TimeSlotProps) {
   return (
     <label key={slot.time} className="custom-radio booking-form__date">
       <input
@@ -14,10 +16,16 @@ export default function TimeSlot({slot, day}: TimeSlotProps) {
         id={`${day}${slot.time.slice(0, 2)}h${slot.time.slice(3,5)}m`}
         name="date"
         required
-        disabled={slot.isAvailable}
-        value={`${day}${slot.time.slice(0, 2)}h${slot.time.slice(3,5)}m`}
+        disabled={!slot.isAvailable}
+        value={day}
+        onChange={onChange}
       />
-      <span className="custom-radio__label">{slot.time}</span>
+      <span
+        className="custom-radio__label"
+        onClick={() => onClick(slot.time)}
+      >
+        {slot.time}
+      </span>
     </label>
   );
 }

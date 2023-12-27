@@ -15,6 +15,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectAuthStatus } from '../../store/user-process/selectors';
 import QuestScreen from '../../pages/quest-screen/quest-screen';
 import { checkAuth } from '../../store/api-actions';
+import NotFoundPage from '../../pages/not-found-page/not-found-page';
 
 export default function App() {
   const authStatus = useAppSelector(selectAuthStatus);
@@ -63,7 +64,7 @@ export default function App() {
             />
             <Route
               path={'*'}
-              element={<h1>404. Page not found</h1>}
+              element={<NotFoundPage />}
             />
           </Route>
         </Routes>

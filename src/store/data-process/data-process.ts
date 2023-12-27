@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { DEFAULT_LEVEL_FILTER, DEFAULT_TYPE_FILTER, FilterLevel, FilterType, NameSpace, RequestStatus } from '../../const';
 import { TDataProcess } from '../../types/state';
-import { fetchActiveQuest, fetchMyQuests, fetchQuestBookingInfo, fetchQuests } from '../api-actions';
+import { deleteBooking, fetchActiveQuest, fetchMyQuests, fetchQuestBookingInfo, fetchQuests, postNewBooking } from '../api-actions';
 
 const initialState: TDataProcess = {
   quests: [],
@@ -10,6 +10,8 @@ const initialState: TDataProcess = {
   questBookingInfo: null,
   fetchingQuestsStatus: RequestStatus.Idle,
   fetchingActiveQuestStatus: RequestStatus.Idle,
+  sendingBookingStatus: RequestStatus.Idle,
+  deletingBookingStatus: RequestStatus.Idle,
   currentLevelFilter: DEFAULT_LEVEL_FILTER,
   currentTypeFilter: DEFAULT_TYPE_FILTER
 };
@@ -66,6 +68,21 @@ export const dataProcess = createSlice({
       })
       .addCase(fetchQuestBookingInfo.rejected, (state) => {
         state.fetchingQuestsStatus = RequestStatus.Error;
+      })
+      .addCase(postNewBooking.pending, (state) => {
+        state.sendingBookingStatus = RequestStatus.Loading;
+      })
+      .addCase(postNewBooking.fulfilled, (state) => {
+        state.sendingBookingStatus = RequestStatus.Success;
+      })
+      .addCase(postNewBooking.rejected, (state) => {
+        state.sendingBookingStatus = RequestStatus.Error;
+      })
+      .addCase(deleteBooking.pending, (state) => {
+        state.deletingBookingStatus = RequestStatus.Loading;
+      })
+      .addCase(deleteBooking.fulfilled, (state) => {
+        state.deletingBookingStatus = RequestStatus.Success;
       });
   }
 });

@@ -46,7 +46,7 @@ export default function Map ({places, currentPlace, setCurrentPlace}: MapProps) 
             position={[item.location.coords[0], item.location.coords[1]]}
             icon={item.id === currentPlace?.id ? currentCustomIcon : defaultCustomIcon}
             eventHandlers={{
-              mouseover: () => {
+              click: () => {
                 if (setCurrentPlace) {
                   setCurrentPlace(item);
                 }

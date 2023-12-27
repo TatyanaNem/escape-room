@@ -1,7 +1,7 @@
 import { AuthorizationStatus, FilterLevel, FilterType, RequestStatus } from '../const';
 import { store } from '../store';
 import { TBookingInfo } from './booking-info';
-import { TQuest, TQuestReview } from './quest';
+import { TMyQuest, TQuest, TQuestReview } from './quest';
 import { TUser } from './user';
 
 export type State = ReturnType<typeof store.getState>;
@@ -17,10 +17,16 @@ export type TUserProcess = {
 export type TDataProcess = {
   quests: TQuestReview[];
   activeQuest: null | TQuest;
-  myQuests: TQuestReview[];
+  myQuests: TMyQuest[];
   questBookingInfo: null | TBookingInfo[];
   fetchingQuestsStatus: RequestStatus;
   fetchingActiveQuestStatus: RequestStatus;
+  sendingBookingStatus: RequestStatus;
+  deletingBookingStatus: RequestStatus;
   currentLevelFilter: FilterLevel;
   currentTypeFilter: FilterType;
+}
+
+export type TAppProcess = {
+  error: string | null;
 }

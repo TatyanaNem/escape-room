@@ -1,13 +1,22 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { TMyQuest, TQuestReview } from '../../types/quest';
+import { TMyQuest } from '../../types/quest';
+import { changeStringEnding } from '../../utils/common';
+import { useAppDispatch } from '../../hooks';
+import { deleteBooking } from '../../store/api-actions';
 
 type MyQuestCardProps = {
-  myQuest: TMyQuest | TQuestReview;
+  myQuest: TMyQuest;
 }
 
 export default function MyQuestCard ({myQuest}: MyQuestCardProps): JSX.Element {
-  const {id} = myQuest;
+  const dispatch = useAppDispatch();
+  const {id: bookingId, location, date, time, peopleCount} = myQuest;
+  const {id, previewImgWebp, previewImg, title, level} = myQuest.quest;
+
+  function onDeleteButtonClickHandler () {
+    dispatch(deleteBooking(bookingId));
+  }
 
   return (
     <div className="quest-card">
@@ -15,14 +24,14 @@ export default function MyQuestCard ({myQuest}: MyQuestCardProps): JSX.Element {
         <picture>
           <source
             type="image/webp"
-            srcSet="img/content/palace/palace-size-s.webp, img/content/palace/palace-size-s@2x.webp 2x"
+            srcSet={`${previewImgWebp}, ${changeStringEnding(previewImgWebp, '@2x.webp 2x')}`}
           />
           <img
-            src="img/content/palace/palace-size-s.jpg"
-            srcSet="img/content/palace/palace-size-s@2x.jpg 2x"
+            src={previewImg}
+            srcSet={changeStringEnding(previewImg, '@2x.webp 2x')}
             width="344"
             height="232"
-            alt="Замок на возвышенности."
+            alt={title}
           />
         </picture>
       </div>
@@ -32,23 +41,29 @@ export default function MyQuestCard ({myQuest}: MyQuestCardProps): JSX.Element {
             className="quest-card__link"
             to={`${AppRoute.Quest}/${id}`}
           >
-            Тайны старого особняка
+            {title}
           </Link>
-          <span className="quest-card__info">[завтра,&nbsp;17:00. наб. реки Карповки&nbsp;5, лит&nbsp;П<br/>м. Петроградская]</span>
+          <span className="quest-card__info">{`[${date === 'today' ? 'сегодня' : 'завтра'}, ${time}. ${location.address}]`}</span>
         </div>
         <ul className="tags quest-card__tags">
           <li className="tags__item">
             <svg width="11" height="14" aria-hidden="true">
               <use xlinkHref="#icon-person"></use>
-            </svg>3&nbsp;чел
+            </svg>{`${peopleCount} чел`}
           </li>
           <li className="tags__item">
             <svg width="14" height="14" aria-hidden="true">
               <use xlinkHref="#icon-level"></use>
-            </svg>Лёгкий
+            </svg>{level}
           </li>
         </ul>
-        <button className="btn btn--accent btn--secondary quest-card__btn" type="button">Отменить</button>
+        <button
+          className="btn btn--accent btn--secondary quest-card__btn"
+          type="button"
+          onClick={onDeleteButtonClickHandler}
+        >
+          Отменить
+        </button>
       </div>
     </div>
   );

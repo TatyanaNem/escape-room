@@ -2,6 +2,7 @@ import axios, {AxiosError, AxiosInstance, AxiosResponse} from 'axios';
 import { StatusCodes } from 'http-status-codes';
 import { getToken } from './token';
 import { BACKEND_URL, REQUEST_TIMEOUT } from '../const';
+import { processErrorHandler } from './process-error-handler';
 
 type DetailMessageType = {
   type: string;
@@ -38,10 +39,11 @@ export const createApi = (): AxiosInstance => {
     (response) => response,
     (error: AxiosError<DetailMessageType>) => {
       if (error.response && shouldDisplayError(error.response)) {
-        console.log(error.response.data.message);
+        const detailMessage = (error.response.data);
+        processErrorHandler(detailMessage.message);
       }
 
-      throw Error;
+      throw error;
     }
   );
 
