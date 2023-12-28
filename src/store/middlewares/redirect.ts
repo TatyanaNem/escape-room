@@ -5,7 +5,7 @@ import {Middleware} from 'redux';
 
 //type Reducer = ReturnType<typeof reducer>;
 
-export const redirect: Middleware<unknown, any> =
+export const redirect: Middleware<unknown, unknown> =
   () =>
     (next) =>
       (action: PayloadAction<string>) => {

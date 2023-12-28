@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { BookingDate } from '../../const';
 import { TSlot } from '../../types/slot';
 
@@ -8,7 +9,7 @@ type TimeSlotProps = {
   onClick: (value: string) => void;
 }
 
-export default function TimeSlot({slot, day, onChange, onClick}: TimeSlotProps) {
+function TimeSlot({slot, day, onChange, onClick}: TimeSlotProps) {
   return (
     <label key={slot.time} className="custom-radio booking-form__date">
       <input
@@ -29,3 +30,6 @@ export default function TimeSlot({slot, day, onChange, onClick}: TimeSlotProps) 
     </label>
   );
 }
+
+const MemoizedComponent = memo(TimeSlot);
+export default MemoizedComponent;

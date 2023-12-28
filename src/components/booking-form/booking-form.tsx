@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { postNewBooking } from '../../store/api-actions';
 import { TBookingFormInputs } from '../../types/booking-form-inputs';
 import { selectActiveQuest } from '../../store/data-process/selectors';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { adaptToServer } from '../../utils/quest';
 
 type BookingFormProps = {
@@ -37,9 +37,9 @@ export default function BookingForm ({currentPlace, questId}: BookingFormProps) 
     reset();
   };
 
-  function onClickHandler(value: string) {
+  const handleSpanClick = useCallback((value: string) => {
     setValue('time', value);
-  }
+  }, [setValue]);
 
   useEffect(() => {
     register('time');
@@ -73,7 +73,7 @@ export default function BookingForm ({currentPlace, questId}: BookingFormProps) 
                     key={item.time}
                     slot={item}
                     onChange={onChange}
-                    onClick={onClickHandler}
+                    onClick={handleSpanClick}
                   />
                 )}
               />
@@ -94,7 +94,7 @@ export default function BookingForm ({currentPlace, questId}: BookingFormProps) 
                     key={item.time}
                     slot={item}
                     onChange={onChange}
-                    onClick={onClickHandler}
+                    onClick={handleSpanClick}
                   />
                 )}
               />

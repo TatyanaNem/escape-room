@@ -3,19 +3,20 @@ import { FilterLevel, FilterType, LevelFilter, TypeFilter } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setCurrentLevelFilter, setCurrentTypeFilter } from '../../store/data-process/data-process';
 import { selectLevelFilter, selectTypeFilter } from '../../store/data-process/selectors';
+import { useCallback } from 'react';
 
 export default function FilterList (): JSX.Element {
   const levelFilter = useAppSelector(selectLevelFilter);
   const typeFilter = useAppSelector(selectTypeFilter);
   const dispatch = useAppDispatch();
 
-  function onChangeTypeFilterHandler (filter: FilterType) {
+  const handleTypeFilterChange = useCallback((filter: FilterType) => {
     dispatch(setCurrentTypeFilter(filter));
-  }
+  }, [dispatch]);
 
-  function onChangeLevelFilterHandler (filter: FilterLevel) {
+  const handleLevelFilterChange = useCallback((filter: FilterLevel) => {
     dispatch(setCurrentLevelFilter(filter));
-  }
+  }, [dispatch]);
 
   return (
     <>
@@ -33,7 +34,7 @@ export default function FilterList (): JSX.Element {
                   icon={item.icon}
                   checked={item.name === typeFilter}
                   labelText={item.labelText}
-                  onChange={() => onChangeTypeFilterHandler(item.name)}
+                  onChange={() => handleTypeFilterChange(item.name)}
                 />))
           }
         </ul>
@@ -51,7 +52,7 @@ export default function FilterList (): JSX.Element {
                   name="level"
                   checked={item.name === levelFilter}
                   labelText={item.labelText}
-                  onChange={() => onChangeLevelFilterHandler(item.name)}
+                  onChange={() => handleLevelFilterChange(item.name)}
                 />))
           }
         </ul>

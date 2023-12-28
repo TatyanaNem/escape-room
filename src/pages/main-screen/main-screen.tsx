@@ -1,23 +1,33 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import FilterForm from '../../components/filter-form/filter-form';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchQuests } from '../../store/api-actions';
-import { selectLevelFilter, selectQuests, selectTypeFilter } from '../../store/data-process/selectors';
+import { selectFetchingQuestsStatus, selectLevelFilter, selectQuests, selectTypeFilter } from '../../store/data-process/selectors';
 import QuestsList from '../../components/quests-list/quests-list';
 import { filterItems } from '../../utils/filter';
 import NoQuests from '../../components/no-quests/no-quests';
+import { RequestStatus } from '../../const';
+import { Spinner } from '../../components/spinner/spinner';
 
 export default function MainScreen(): JSX.Element {
   const quests = useAppSelector(selectQuests);
   const dispatch = useAppDispatch();
   const levelFilter = useAppSelector(selectLevelFilter);
   const typeFilter = useAppSelector(selectTypeFilter);
+  const fetchingStatus = useAppSelector(selectFetchingQuestsStatus);
 
-  const filteredQuests = filterItems(quests, typeFilter, levelFilter);
+  const filteredQuests = useMemo(
+    () => filterItems(quests, typeFilter, levelFilter),
+    [typeFilter, levelFilter, quests]
+  );
 
   useEffect(() => {
     dispatch(fetchQuests());
   }, [dispatch]);
+
+  if (fetchingStatus === RequestStatus.Loading) {
+    return <Spinner/>;
+  }
 
   return (
     <main className="page-content">

@@ -14,7 +14,7 @@ export default function MyQuestCard ({myQuest}: MyQuestCardProps): JSX.Element {
   const {id: bookingId, location, date, time, peopleCount} = myQuest;
   const {id, previewImgWebp, previewImg, title, level} = myQuest.quest;
 
-  function onDeleteButtonClickHandler () {
+  function handleDeleteButtonClick () {
     dispatch(deleteBooking(bookingId));
   }
 
@@ -60,7 +60,7 @@ export default function MyQuestCard ({myQuest}: MyQuestCardProps): JSX.Element {
         <button
           className="btn btn--accent btn--secondary quest-card__btn"
           type="button"
-          onClick={onDeleteButtonClickHandler}
+          onClick={handleDeleteButtonClick}
         >
           Отменить
         </button>

@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { TIcon } from '../../types/filter-item';
 
 type FilterItemProps = {
@@ -11,7 +12,7 @@ type FilterItemProps = {
 
 }
 
-export default function FilterItem ({id, value, name, icon, checked, labelText, onChange}: FilterItemProps) {
+function FilterItem ({id, value, name, icon, checked, labelText, onChange}: FilterItemProps) {
   return (
     <li key={id} className="filter__item">
       <input
@@ -43,3 +44,6 @@ export default function FilterItem ({id, value, name, icon, checked, labelText, 
     </li>
   );
 }
+
+const MemoizedComponent = memo(FilterItem);
+export default MemoizedComponent;
